@@ -19,7 +19,7 @@ model Form {
   name        String
   description String @default("")
   content     String @default("[]")
-  visit       Int @default(0)
+  visits       Int @default(0)
   subnissions Int @default(0)
 
   shareURL    String @default(uuid())

@@ -7,7 +7,7 @@ CREATE TABLE "Form" (
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL DEFAULT '',
     "content" TEXT NOT NULL DEFAULT '[]',
-    "visit" INTEGER NOT NULL DEFAULT 0,
+    "visits" INTEGER NOT NULL DEFAULT 0,
     "subnissions" INTEGER NOT NULL DEFAULT 0,
     "shareURL" TEXT NOT NULL,
 
