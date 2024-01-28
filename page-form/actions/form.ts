@@ -17,12 +17,12 @@ export async function GetFormStats() {
         },
         _sum:{
             visits: true,
-            subnissions :true
+            submissions :true,
         }
     })
 
     const visits = stats._sum.visits || 0;
-    const submissions = stats._sum.subnissions || 0;
+    const submissions = stats._sum.submissions || 0;
     let submissionsRate = 0;
     if(visits >0){
         submissionsRate = (submissions / visits) *100;
@@ -48,7 +48,7 @@ export async function CreateForm (data: formSchemaType){
         data: {
             userId: user.id,
             name,
-            description
+            description,
         }
     })
 
@@ -100,7 +100,7 @@ export async function UpdateFormContent(id: number, jsonContent: string) {
         },
         data: {
             content:jsonContent,
-        }
+        },
     })
 }
 
@@ -118,5 +118,56 @@ export async function PublishForm(id:number){
             userId: user.id,
             id,
         }
+    })
+}
+
+export async function GetFormContentByUrl(formUrl:string){
+    return await prisma.form.update({
+        select:{
+            content:true,
+        },
+        data:{
+            visits:{
+                increment:1
+            }
+        },
+        where:{
+            shareURL:formUrl
+        }
+    })
+}
+export async function SubmitForm(formUrl : string , content : string){
+    return await prisma.form.update({
+        data:{
+            submissions:{
+                increment:1
+            },
+            formSubmissions:{
+                create:{
+                    content
+                }
+            }
+        },
+        where:{
+            shareURL:formUrl,
+            published:true
+        }
+    })
+}
+
+export async function GetFormWithSubmissions(id:number) {
+    const user = await currentUser();
+    if(!user) {
+        throw new UserNotFoundErr();
+    }
+
+    return prisma.form.findUnique({
+       where:{
+        userId:user.id,
+        id
+       },
+       include:{
+        formSubmissions:true
+       }
     })
 }

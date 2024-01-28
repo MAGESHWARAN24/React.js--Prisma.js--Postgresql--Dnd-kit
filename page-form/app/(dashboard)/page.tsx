@@ -80,7 +80,7 @@ function StatsCards(props: StatsCardProps) {
   </div>
 }
 
-function StatsCard(
+export function StatsCard(
   {
     title,
     Value,
@@ -147,7 +147,7 @@ function FormCard({ form }: {form:Form }){
           <LuView className="text-muted-foreground"/>
           <span>{!form.visits.toLocaleString()}</span>
           <FaWpforms className="text-muted-foreground"/>
-          <span>{form.subnissions.toLocaleString()}</span>
+          <span>{form.submissions.toLocaleString()}</span>
         </span>
       }
     </CardDescription>

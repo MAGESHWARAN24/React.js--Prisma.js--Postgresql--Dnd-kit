@@ -12,7 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { FaIcons } from 'react-icons/fa';
+import { FaIcons, FaSpinner } from 'react-icons/fa';
 import { toast } from './ui/use-toast';
 import { PublishForm } from '@/actions/form';
 import { useRouter } from 'next/navigation';
@@ -58,7 +58,7 @@ function PublishFormBtn({id}:{id:number}) {
         <AlertDialogAction disabled={loading} onClick={(e)=>{
           e.preventDefault();
           startTransition(publishForm)
-        }}>Proceed {loading && <FaIcons/>}</AlertDialogAction>
+        }}>Proceed {loading && <FaSpinner/>}</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
    </AlertDialog>
